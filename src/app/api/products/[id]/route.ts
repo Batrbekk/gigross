@@ -9,7 +9,7 @@ import { LotStatus, CertificateStatus } from '@/types';
 // GET /api/products/[id] - Получить детальную информацию о продукте
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -19,7 +19,7 @@ export async function GET(
       return authResult.response;
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     // Получаем детальную информацию о продукте
     const product = await Product.findById(id)

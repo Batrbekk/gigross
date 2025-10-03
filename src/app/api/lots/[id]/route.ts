@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAuth, requireOwnership } from '@/lib/auth/middleware';
+import { requireOwnership } from '@/lib/auth/middleware';
 import { updateLotSchema } from '@/lib/validation/schemas';
 import { Lot } from '@/database/models/Lot';
 import { Bid } from '@/database/models/Bid';
@@ -83,7 +83,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     }
 
     // Проверка прав доступа
-    const authResult = await requireOwnership(request, existingLot.producerId);
+    const authResult = await requireOwnership(request, typeof existingLot.producerId === 'string' ? existingLot.producerId : existingLot.producerId._id, 'lot');
     if (!authResult.success) {
       return authResult.response;
     }
@@ -152,7 +152,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     }
 
     // Проверка прав доступа
-    const authResult = await requireOwnership(request, existingLot.producerId);
+    const authResult = await requireOwnership(request, typeof existingLot.producerId === 'string' ? existingLot.producerId : existingLot.producerId._id, 'lot');
     if (!authResult.success) {
       return authResult.response;
     }

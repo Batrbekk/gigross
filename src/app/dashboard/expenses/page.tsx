@@ -12,19 +12,14 @@ import { formatCurrency, CurrencyCode } from '@/lib/currency';
 import { 
   DollarSign, 
   Search, 
-  TrendingDown,
-  TrendingUp,
   Calendar,
-  Filter,
   Download,
   Plus,
   PieChart,
-  BarChart3,
   CreditCard,
   Wallet,
   ShoppingCart,
-  Truck,
-  AlertCircle
+  Truck
 } from 'lucide-react';
 import { EmptyState } from '@/components/ui/empty-state';
 
@@ -57,7 +52,6 @@ export default function ExpensesPage() {
   const [typeFilter, setTypeFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
   const [sortBy, setSortBy] = useState('newest');
-  const [dateRange, setDateRange] = useState('all');
 
   const fetchExpenses = async () => {
     try {
@@ -66,11 +60,11 @@ export default function ExpensesPage() {
       if (typeFilter !== 'all') params.append('type', typeFilter);
       if (statusFilter !== 'all') params.append('status', statusFilter);
       params.append('sort', sortBy);
-      if (dateRange !== 'all') params.append('dateRange', dateRange);
+      // if (dateRange !== 'all') params.append('dateRange', dateRange);
 
       const response = await execute(`/api/expenses?${params.toString()}`, { method: 'GET' });
       if (response && response.success) {
-        setExpenses(response.data.data || response.data);
+        setExpenses((response.data as any).data || response.data);
       }
     } catch (error) {
       console.error('Error fetching expenses:', error);
@@ -79,7 +73,7 @@ export default function ExpensesPage() {
 
   useEffect(() => {
     fetchExpenses();
-  }, [searchQuery, typeFilter, statusFilter, sortBy, dateRange]);
+  }, [searchQuery, typeFilter, statusFilter, sortBy]);
 
   const getTypeBadge = (type: string) => {
     const typeConfig = {

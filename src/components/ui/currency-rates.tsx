@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { RefreshCw, TrendingUp, TrendingDown } from 'lucide-react';
+import { RefreshCw, TrendingUp } from 'lucide-react';
 import { useExchangeRates } from '@/hooks/useCurrency';
 import { CurrencyCode, formatCurrency } from '@/lib/currency';
 
@@ -16,7 +16,7 @@ interface CurrencyRatesProps {
 
 export function CurrencyRates({ 
   baseCurrency = 'KZT', 
-  showAll = false,
+  // _showAll = false,
   className = '' 
 }: CurrencyRatesProps) {
   const { rates, isLoading, error, refresh } = useExchangeRates();

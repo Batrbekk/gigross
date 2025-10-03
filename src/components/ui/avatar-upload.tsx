@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, X, CheckCircle, AlertCircle, User } from 'lucide-react';
+import { Upload, X, AlertCircle, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';

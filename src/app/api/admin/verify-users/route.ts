@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
         });
       } catch (error) {
         console.error(`Error verifying user ${user.email}:`, error);
-        errors.push(`Ошибка верификации пользователя ${user.email}: ${error.message}`);
+        errors.push(`Ошибка верификации пользователя ${user.email}: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     }
 

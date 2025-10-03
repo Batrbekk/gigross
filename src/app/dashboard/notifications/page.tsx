@@ -137,7 +137,7 @@ export default function NotificationsPage() {
   };
 
   const getNotificationIcon = (type: NotificationType) => {
-    const iconMap: Record<NotificationType, React.ElementType> = {
+    const iconMap: Record<string, any> = {
       [NotificationType.NEW_BID]: Gavel,
       [NotificationType.BID_WON]: Award,
       [NotificationType.BID_OUTBID]: TrendingUp,
@@ -159,7 +159,7 @@ export default function NotificationsPage() {
   };
 
   const getNotificationColor = (type: NotificationType) => {
-    const colorMap: Record<NotificationType, string> = {
+    const colorMap: Record<string, string> = {
       [NotificationType.NEW_BID]: 'text-blue-500',
       [NotificationType.BID_WON]: 'text-green-500',
       [NotificationType.BID_OUTBID]: 'text-orange-500',
@@ -181,7 +181,7 @@ export default function NotificationsPage() {
   };
 
   const getTypeLabel = (type: NotificationType) => {
-    const labelMap: Record<NotificationType, string> = {
+    const labelMap: Record<string, string> = {
       [NotificationType.NEW_BID]: 'Новая ставка',
       [NotificationType.BID_WON]: 'Ставка выиграна',
       [NotificationType.BID_OUTBID]: 'Ставка перебита',

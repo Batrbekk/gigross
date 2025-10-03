@@ -3,7 +3,7 @@ import connectDB from '@/config/database';
 import mongoose from 'mongoose';
 
 // GET /api/health - Проверка состояния API и подключения к БД
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     // Проверяем подключение к MongoDB
     await connectDB();

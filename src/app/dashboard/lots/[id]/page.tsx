@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -19,23 +19,18 @@ import {
   Package,
   Building2,
   MapPin,
-  Calendar,
   Clock,
   Users,
-  Eye,
-  TrendingUp,
   Gavel,
   AlertCircle,
   CheckCircle,
   Star,
   Phone,
   Mail,
-  ExternalLink,
   Wifi,
   WifiOff,
 } from 'lucide-react';
 import { EmptyState } from '@/components/ui/empty-state';
-import { cn } from '@/lib/utils';
 
 interface LotDetails {
   _id: string;
@@ -95,14 +90,12 @@ export default function LotDetailsPage() {
   const { user } = useAuthStore();
   const [lot, setLot] = useState<LotDetails | null>(null);
   const [isBidModalOpen, setIsBidModalOpen] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
 
   const lotId = params.id as string;
 
   // Polling обновления для конкретного лота каждые 5 секунд
   const { 
-    isConnected: isPollingConnected,
-    refreshBids 
+    isConnected: isPollingConnected 
   } = useBidsPolling({
     lotId: lotId,
     interval: 5000, // 5 секунд для страницы лота
@@ -119,16 +112,16 @@ export default function LotDetailsPage() {
 
   const fetchLotDetails = async () => {
     try {
-      setRefreshing(true);
+      // setRefreshing(true);
       const response = await execute(`/api/lots/${lotId}`, { method: 'GET' });
       
       if (response && response.success) {
-        setLot(response.data);
+        setLot(response.data as LotDetails);
       }
     } catch (error) {
       console.error('Error fetching lot details:', error);
     } finally {
-      setRefreshing(false);
+      // setRefreshing(false);
     }
   };
 
@@ -161,7 +154,7 @@ export default function LotDetailsPage() {
     }
   }, [lotId]);
 
-  const handleBidPlaced = (newBid: any) => {
+  const handleBidPlaced = (_newBid: Record<string, unknown>) => {
     // Обновляем данные лота после размещения ставки
     fetchLotDetails();
   };
@@ -199,20 +192,7 @@ export default function LotDetailsPage() {
     return translations[category] || category;
   };
 
-  const formatDate = (dateString: string) => {
-    try {
-      const date = new Date(dateString);
-      return date.toLocaleDateString('ru-RU', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-    } catch {
-      return 'Неверная дата';
-    }
-  };
+  // formatDate function removed as it's not used
 
   const isAuctionActive = lot && new Date(lot.auction?.endDate || lot.endDate || '') > new Date();
   const canPlaceBid = lot && lot.status === 'active' && isAuctionActive && lot.producerId?._id !== user?.id;

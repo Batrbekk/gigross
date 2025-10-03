@@ -57,8 +57,8 @@ export const BidsList: React.FC<BidsListProps> = ({
     enabled: true,
     onBidsUpdate: (data) => {
       console.log('BidsList updated via polling:', data.length, 'bids');
-      // Обновляем локальное состояние
-      setBids(data);
+      // Обновляем локальное состояние с приведением типов
+      setBids(data as unknown as Bid[]);
     },
     onError: (error) => {
       console.error('Polling error in BidsList:', error);
@@ -73,7 +73,7 @@ export const BidsList: React.FC<BidsListProps> = ({
       });
       
       if (response && response.success) {
-        setBids(response.data);
+        setBids(response.data as unknown as Bid[]);
       }
     } catch (error) {
       console.error('Error fetching bids:', error);
@@ -266,7 +266,7 @@ export const BidsList: React.FC<BidsListProps> = ({
                         </Badge>
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        {formatTimeAgo(bid.createdAt)}
+                        {formatTimeAgo(bid.createdAt.toString())}
                       </p>
                     </div>
                     

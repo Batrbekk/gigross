@@ -152,7 +152,7 @@ export async function POST(request: NextRequest) {
         });
       } catch (error) {
         console.error(`Error creating user ${userData.email}:`, error);
-        errors.push(`Ошибка создания пользователя ${userData.email}: ${error.message}`);
+        errors.push(`Ошибка создания пользователя ${userData.email}: ${error instanceof Error ? error.message : 'Unknown error'}`);
       }
     }
 

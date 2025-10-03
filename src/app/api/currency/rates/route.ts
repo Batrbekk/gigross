@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getExchangeRates } from '@/lib/currency';
 
 // GET /api/currency/rates - Получить актуальные курсы валют
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
     const rates = await getExchangeRates();
     
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
         timestamp: Date.now(),
       },
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       {
         success: false,

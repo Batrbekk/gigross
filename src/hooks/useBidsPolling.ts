@@ -122,7 +122,7 @@ export function useBidsPolling({
     fetchFunction: fetchBids,
     interval,
     enabled,
-    onSuccess: (data) => {
+    onSuccess: (_data) => {
       setIsConnected(true);
     },
     onError: (error) => {

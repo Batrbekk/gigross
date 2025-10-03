@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Проверяем, что пользователь - дистрибьютор или инвестор
-    if (![UserRole.DISTRIBUTOR, UserRole.INVESTOR].includes(authResult.userRole)) {
+    if (!authResult.userRole || ![UserRole.DISTRIBUTOR, UserRole.INVESTOR].includes(authResult.userRole as UserRole)) {
       return NextResponse.json(
         {
           success: false,

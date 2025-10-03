@@ -25,7 +25,7 @@ interface LotState {
   setCurrentLot: (lot: Lot | null) => void;
 }
 
-export const useLotStore = create<LotState>((set, get) => ({
+export const useLotStore = create<LotState>((set, _get) => ({
   lots: [],
   currentLot: null,
   activeLots: [],

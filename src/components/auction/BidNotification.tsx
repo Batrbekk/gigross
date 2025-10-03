@@ -8,7 +8,6 @@ import { formatCurrency } from '@/lib/currency';
 import { 
   Trophy, 
   X, 
-  TrendingUp,
   User,
   Clock
 } from 'lucide-react';

@@ -7,7 +7,7 @@ export interface BidDocument extends IBid, Document {
 
 const BidSchema = new Schema<BidDocument>(
   {
-    lotId: { type: Schema.Types.ObjectId, ref: 'Lot', required: true, index: true },
+    lotId: { type: Schema.Types.ObjectId as any, ref: 'Lot', required: true, index: true },
     bidderId: { type: String, required: true, index: true },
     amount: { type: Number, required: true, min: 0 },
     currency: { type: String, required: true, default: 'RUB' },

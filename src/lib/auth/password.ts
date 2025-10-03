@@ -9,7 +9,7 @@ export async function hashPassword(password: string): Promise<string> {
   try {
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     return await bcrypt.hash(password, salt);
-  } catch (error) {
+  } catch {
     throw new Error('Failed to hash password');
   }
 }
@@ -20,7 +20,7 @@ export async function hashPassword(password: string): Promise<string> {
 export async function comparePassword(password: string, hash: string): Promise<boolean> {
   try {
     return await bcrypt.compare(password, hash);
-  } catch (error) {
+  } catch{
     throw new Error('Failed to compare password');
   }
 }
@@ -121,7 +121,7 @@ export function generateRandomPassword(length: number = 12): string {
 /**
  * Проверяет, не был ли пароль скомпрометирован (заглушка для будущей интеграции с HaveIBeenPwned)
  */
-export async function checkPasswordBreach(password: string): Promise<boolean> {
+export async function checkPasswordBreach(): Promise<boolean> {
   // В реальном приложении здесь была бы интеграция с API HaveIBeenPwned
   // Пока возвращаем false (пароль не скомпрометирован)
   return false;

@@ -1,7 +1,7 @@
 import { Product } from '@/database/models/Product';
 import { Lot } from '@/database/models/Lot';
 import { Bid } from '@/database/models/Bid';
-import { ProductStatus, LotStatus } from '@/types';
+import { LotStatus } from '@/types';
 
 export interface GrowthStats {
   current: number;

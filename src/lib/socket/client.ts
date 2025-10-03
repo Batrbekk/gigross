@@ -72,7 +72,7 @@ export class SocketClient {
   private static instance: SocketClient;
   private socket: Socket | null = null;
   private accessToken: string | null = null;
-  private eventListeners: Map<string, Function[]> = new Map();
+  private eventListeners: Map<string, ((...args: unknown[]) => void)[]> = new Map();
 
   private constructor() {}
 
@@ -165,7 +165,7 @@ export class SocketClient {
     if (!this.eventListeners.has(event)) {
       this.eventListeners.set(event, []);
     }
-    this.eventListeners.get(event)!.push(callback);
+    this.eventListeners.get(event)!.push(callback as any);
 
     if (this.socket?.connected) {
       this.socket.on(event, callback as any);
@@ -175,7 +175,7 @@ export class SocketClient {
   public off<K extends keyof SocketEvents>(event: K, callback?: SocketEvents[K]): void {
     if (callback) {
       const listeners = this.eventListeners.get(event) || [];
-      const index = listeners.indexOf(callback);
+      const index = listeners.indexOf(callback as any);
       if (index > -1) {
         listeners.splice(index, 1);
       }

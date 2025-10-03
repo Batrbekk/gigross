@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAuth, requireProducer } from '@/lib/auth/middleware';
+import { requireProducer } from '@/lib/auth/middleware';
 import { createLotSchema, lotFiltersSchema } from '@/lib/validation/schemas';
 import { Lot } from '@/database/models/Lot';
 import { Product } from '@/database/models/Product';
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const { page, limit, sortBy, sortOrder, category, producerId, excludeProducerId, minPrice, maxPrice, location, status, excludeStatus, auctionType } =
+    const { page, limit, sortBy, sortOrder, producerId, excludeProducerId, minPrice, maxPrice, location, status, excludeStatus, auctionType } =
       validationResult.data;
 
     // Построение запроса
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (product.producerId !== user.userId) {
+    if (product.producerId !== user?.userId) {
       return NextResponse.json(
         {
           success: false,
@@ -172,7 +172,7 @@ export async function POST(request: NextRequest) {
     // Создание лота
     const lotObject = {
       ...lotData,
-      producerId: user.userId,
+      producerId: user?.userId || '',
       currentPrice: lotData.startingPrice,
       auction: {
         ...lotData.auction,
@@ -182,7 +182,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Убираем coordinates если они не заданы
-    if (!lotObject.location.coordinates) {
+    if (!(lotObject.location as any).coordinates) {
       delete (lotObject.location as any).coordinates;
     }
 

@@ -13,7 +13,7 @@ export async function PUT(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
     const body = await request.json();
 
     let updateResult;
@@ -23,14 +23,14 @@ export async function PUT(request: NextRequest) {
       updateResult = await Notification.updateMany(
         {
           _id: { $in: body.notificationIds },
-          userId: user.userId,
+          userId: userId,
         },
         { read: true }
       );
     } else if (body.markAllAsRead) {
       // Отметить все уведомления как прочитанные
       updateResult = await Notification.updateMany(
-        { userId: user.userId, read: false },
+        { userId: userId, read: false },
         { read: true }
       );
     } else {

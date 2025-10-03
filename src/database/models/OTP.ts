@@ -42,10 +42,10 @@ const OTPSchema = new Schema<OTPDocument>(
     toJSON: {
       virtuals: true,
       transform: (doc, ret) => {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
-        delete ret.code; // Не возвращаем код в JSON
+        ret.id = (ret._id as any).toString();
+        delete (ret as any)._id;
+        delete (ret as any).__v;
+        delete (ret as any).code; // Не возвращаем код в JSON
       },
     },
   }

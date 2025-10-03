@@ -10,7 +10,7 @@ import { UserRole, LotStatus, CertificateStatus } from '@/types';
 // GET /api/companies/[id] - Получить данные компании
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -20,7 +20,7 @@ export async function GET(
       return authResult.response;
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     // Получаем данные компании
     const company = await User.findById(id)

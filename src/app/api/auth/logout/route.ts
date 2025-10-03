@@ -14,7 +14,7 @@ export async function POST(_request: NextRequest) {
     response.cookies.delete('refreshToken');
 
     return response;
-  } catch (error) {
+  } catch {
     // Log error for debugging purposes
 
     return NextResponse.json(

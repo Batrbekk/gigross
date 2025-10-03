@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useApi } from '@/hooks/useApi';
-import { formatCurrency, CurrencyCode } from '@/lib/currency';
+import { formatCurrency } from '@/lib/currency';
 import { 
   ShoppingCart, 
   Search, 
@@ -79,7 +79,7 @@ export default function PurchasesPage() {
 
       const response = await execute(`/api/purchases?${params.toString()}`, { method: 'GET' });
       if (response && response.success) {
-        setPurchases(response.data.data || response.data);
+        setPurchases((response.data as any).data || response.data);
       }
     } catch (error) {
       console.error('Error fetching purchases:', error);

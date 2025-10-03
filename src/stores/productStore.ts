@@ -23,7 +23,7 @@ interface ProductState {
   setCurrentProduct: (product: Product | null) => void;
 }
 
-export const useProductStore = create<ProductState>((set, get) => ({
+export const useProductStore = create<ProductState>((set, _get) => ({
   products: [],
   currentProduct: null,
   isLoading: false,

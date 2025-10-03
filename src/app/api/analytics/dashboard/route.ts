@@ -223,6 +223,11 @@ export async function GET(request: NextRequest) {
           status: 'active' 
         });
         
+        const mySoldLots = await Lot.countDocuments({ 
+          producerId: user._id, 
+          status: 'sold' 
+        });
+        
         // Доходы от продаж (ставки на лоты пользователя)
         const myLots = await Lot.find({ producerId: user._id }).select('_id');
         const myLotIds = myLots.map(lot => lot._id);
@@ -264,7 +269,7 @@ export async function GET(request: NextRequest) {
         overview = {
           totalProducts: myProducts,
           activeLots: myActiveLots,
-          soldLots: growthStats.soldLots.current,
+          soldLots: mySoldLots,
           totalRevenue: myRevenue,
           totalOrders: myOrders,
           currency: user.preferences?.currency || 'KZT',

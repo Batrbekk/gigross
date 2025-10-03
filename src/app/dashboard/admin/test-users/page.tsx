@@ -47,7 +47,7 @@ export default function TestUsersPage() {
     try {
       const response = await execute('/api/admin/test-users', { method: 'GET' });
       if (response && response.success) {
-        setTestUsers(response.data);
+        setTestUsers(response.data as TestUser[]);
       }
     } catch (error) {
       console.error('Error fetching test users:', error);
@@ -64,7 +64,7 @@ export default function TestUsersPage() {
       if (response && response.success) {
         setMessage({ 
           type: 'success', 
-          text: `Создано ${response.data.successful} из ${response.data.total} тестовых пользователей` 
+          text: `Создано ${(response.data as any).successful} из ${(response.data as any).total} тестовых пользователей` 
         });
         fetchTestUsers();
       } else {
@@ -87,7 +87,7 @@ export default function TestUsersPage() {
       if (response && response.success) {
         setMessage({ 
           type: 'success', 
-          text: `Удалено ${response.data.deletedCount} тестовых пользователей` 
+          text: `Удалено ${(response.data as any).deletedCount} тестовых пользователей` 
         });
         fetchTestUsers();
       } else {

@@ -118,7 +118,7 @@ export async function requireAdmin(request: NextRequest): Promise<AuthResult> {
   return authResult;
 }
 
-export async function requireOwnership(request: NextRequest, resourceId: string, resourceType: 'product' | 'lot'): Promise<AuthResult> {
+export async function requireOwnership(request: NextRequest, _resourceId: string, _resourceType: 'product' | 'lot'): Promise<AuthResult> {
   const authResult = await requireAuth(request);
   
   if (!authResult.success) {

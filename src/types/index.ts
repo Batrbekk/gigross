@@ -86,8 +86,6 @@ export enum NotificationType {
   LOT_ACTIVATED = 'lot_activated',
   LOT_DEACTIVATED = 'lot_deactivated',
   BID_PLACED = 'bid_placed',
-  BID_WON = 'bid_won',
-  SYSTEM_UPDATE = 'system_update',
 }
 
 export enum NotificationStatus {
@@ -130,8 +128,6 @@ export enum NotificationType {
   PAYMENT_RECEIVED = 'payment_received',
   PAYMENT_FAILED = 'payment_failed',
   SYSTEM_UPDATE = 'system_update',
-  CERTIFICATE_APPROVED = 'certificate_approved',
-  CERTIFICATE_REJECTED = 'certificate_rejected',
 }
 
 export enum PaymentMethodType {

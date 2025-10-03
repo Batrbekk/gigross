@@ -50,7 +50,7 @@ export const createProductSchema = z.object({
     volume: z.number().min(0, 'Volume must be non-negative'),
     alcoholContent: z.number().min(0, 'Alcohol content must be non-negative').max(100, 'Alcohol content cannot exceed 100%'),
     ingredients: z.array(z.string().min(1, 'Ingredient cannot be empty')),
-    nutritionFacts: z.record(z.any()).optional(),
+    nutritionFacts: z.record(z.string(), z.any()).optional(),
   }),
   images: z.array(z.string().url('Invalid image URL')),
   producerId: objectIdSchema.optional(),

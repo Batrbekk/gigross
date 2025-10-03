@@ -17,7 +17,7 @@ export function usePolling<T>({
   enabled = true,
   onSuccess,
   onError,
-  dependencies = [],
+  // _dependencies = [],
 }: UsePollingOptions<T>) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const isPollingRef = useRef(false);

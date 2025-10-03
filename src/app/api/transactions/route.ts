@@ -3,7 +3,7 @@ import { requireAuth } from '@/lib/auth/middleware';
 import { paginationSchema } from '@/lib/validation/schemas';
 import { Transaction } from '@/database/models/Transaction';
 import connectDB from '@/config/database';
-import { TransactionType, TransactionStatus, PaymentMethodType } from '@/types';
+import { TransactionStatus, PaymentMethodType } from '@/types';
 
 // GET /api/transactions - Получить список транзакций пользователя
 export async function GET(request: NextRequest) {
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
     const { searchParams } = new URL(request.url);
     const filters = Object.fromEntries(searchParams.entries());
 
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     const { page, limit, sortBy, sortOrder } = validationResult.data;
 
     // Построение запроса
-    const query: any = { userId: user.userId };
+    const query: any = { userId: userId };
 
     // Фильтр по типу транзакции
     if (filters.type) {
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
     const body = await request.json();
 
     // Простая валидация
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Mock обработка транзакции
-    const mockProcessTransaction = (type: string, amount: number) => {
+    const mockProcessTransaction = (_type: string, _amount: number) => {
       // Имитируем различные сценарии
       const random = Math.random();
       
@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
 
     // Создание транзакции
     const transaction = new Transaction({
-      userId: user.userId,
+      userId: userId,
       type: body.type,
       amount: body.amount,
       currency: body.currency || 'RUB',

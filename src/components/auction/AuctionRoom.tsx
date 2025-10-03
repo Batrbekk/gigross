@@ -1,15 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Separator } from '@/components/ui/separator';
 import { useAuction, AuctionBid } from '@/hooks/useAuction';
-import { useAuthStore } from '@/stores/authStore';
 import { 
   Clock, 
   Gavel, 
@@ -35,10 +33,9 @@ export const AuctionRoom: React.FC<AuctionRoomProps> = ({
   lotTitle,
   initialPrice,
   currency = 'RUB',
-  endTime,
+  // _endTime,
   className = '',
 }) => {
-  const { user } = useAuthStore();
   const [bidAmount, setBidAmount] = useState<string>('');
   const [bidMessage, setBidMessage] = useState<string>('');
   const [isPlacingBid, setIsPlacingBid] = useState(false);
@@ -48,7 +45,6 @@ export const AuctionRoom: React.FC<AuctionRoomProps> = ({
     isConnected,
     isLoading,
     error,
-    connect,
     placeBid,
     clearError,
   } = useAuction({
@@ -238,7 +234,7 @@ export const AuctionRoom: React.FC<AuctionRoomProps> = ({
           </div>
 
           {/* Форма размещения ставки */}
-          {isConnected && user && (
+          {isConnected && (
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Сделать ставку</CardTitle>
@@ -318,7 +314,7 @@ export const AuctionRoom: React.FC<AuctionRoomProps> = ({
                       </div>
                       {bid.message && (
                         <div className="text-xs text-muted-foreground italic">
-                          "{bid.message}"
+                          &quot;{bid.message}&quot;
                         </div>
                       )}
                     </div>

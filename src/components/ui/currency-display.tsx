@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { formatCurrency, convertCurrency, getCurrencySymbol, CurrencyCode } from '@/lib/currency';
+import { formatCurrency, convertCurrency, CurrencyCode } from '@/lib/currency';
 
 interface CurrencyDisplayProps {
   amount: number;

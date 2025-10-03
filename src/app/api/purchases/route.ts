@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Проверяем, что пользователь - дистрибьютор или инвестор
-    if (![UserRole.DISTRIBUTOR, UserRole.INVESTOR].includes(authResult.userRole)) {
+    if (!authResult.userRole || ![UserRole.DISTRIBUTOR, UserRole.INVESTOR].includes(authResult.userRole as UserRole)) {
       return NextResponse.json(
         {
           success: false,
@@ -67,10 +67,6 @@ export async function GET(request: NextRequest) {
       default:
         sortOptions = { createdAt: -1 };
     }
-
-    // Подсчет общего количества
-    const total = await Bid.countDocuments(query);
-    const totalPages = Math.ceil(total / limit);
 
     // Получение покупок с пагинацией
     const bids = await Bid.find(query)

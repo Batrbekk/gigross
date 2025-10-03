@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useApi } from '@/hooks/useApi';
-import { formatCurrency, CurrencyCode } from '@/lib/currency';
+// Импорт валютного форматирования удален - неиспользуется
 import { 
   Truck, 
   Search, 
@@ -19,7 +19,6 @@ import {
   CheckCircle,
   XCircle,
   Eye,
-  Download,
   RefreshCw,
   AlertCircle
 } from 'lucide-react';
@@ -79,7 +78,7 @@ export default function DeliveriesPage() {
 
       const response = await execute(`/api/deliveries?${params.toString()}`, { method: 'GET' });
       if (response && response.success) {
-        setDeliveries(response.data.data || response.data);
+        setDeliveries((response.data as any).data || response.data);
       }
     } catch (error) {
       console.error('Error fetching deliveries:', error);

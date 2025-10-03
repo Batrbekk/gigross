@@ -102,7 +102,7 @@ export default function LotsPage() {
         // Для вкладки "Все лоты" исключаем черновики
         ...(tab === 'all' && { excludeStatus: 'draft' }),
         // Для вкладки "Активные торги" показываем только активные лоты
-        ...(tab === 'active' && { status: 'active' }),
+        // ...(tab === 'active' && { status: 'active' }),
       });
 
       const response = await execute(`/api/lots?${params}`, { method: 'GET' });

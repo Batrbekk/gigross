@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
     // Создание продукта
     const product = new Product({
       ...productData,
-      producerId: user.userId,
+      producerId: user?.userId || '',
     });
 
     await product.save();

@@ -14,11 +14,11 @@ export async function GET(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
 
     // Получаем все завершенные транзакции пользователя
     const transactions = await Transaction.find({
-      userId: user.userId,
+      userId: userId,
       status: TransactionStatus.COMPLETED,
     }).exec();
 

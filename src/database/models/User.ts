@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { User as IUser, UserRole } from '@/types';
 
-export interface UserDocument extends Omit<IUser, '_id'>, Document {}
+export interface UserDocument extends Omit<IUser, '_id' | 'id'>, Document {}
 
 const AddressSchema = new Schema({
   street: { type: String, required: true },

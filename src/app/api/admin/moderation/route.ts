@@ -77,7 +77,7 @@ export async function GET(request: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     // Log error for debugging purposes
 
     return NextResponse.json(
@@ -141,15 +141,15 @@ export async function PUT(request: NextRequest) {
       case 'certificate':
         if (action === 'approve') {
           result = await Certificate.findByIdAndUpdate(id, { 
-            status: CertificateStatus.VERIFIED,
-            verifiedBy: authResult.user.userId,
+            status: CertificateStatus.APPROVED,
+            verifiedBy: authResult.userId,
             verifiedAt: new Date(),
             verificationNotes: reason || 'Approved by admin'
           });
         } else if (action === 'reject') {
           result = await Certificate.findByIdAndUpdate(id, { 
             status: CertificateStatus.REJECTED,
-            verifiedBy: authResult.user.userId,
+            verifiedBy: authResult.userId,
             verifiedAt: new Date(),
             verificationNotes: reason || 'Rejected by admin'
           });
@@ -184,7 +184,7 @@ export async function PUT(request: NextRequest) {
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch {
     // Log error for debugging purposes
 
     return NextResponse.json(

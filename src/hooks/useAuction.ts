@@ -194,14 +194,14 @@ export const useAuction = ({
 
     // Подписка на события
     socket.on('bid_update', handleBidUpdate);
-    socket.on('auction_joined', handleAuctionJoined);
+    (socket as any).on('auction_joined', handleAuctionJoined);
     socket.on('auction_ended', handleAuctionEnd);
     socket.on('bid_error', handleBidError);
 
     // Отписка при размонтировании
     return () => {
       socket.off('bid_update', handleBidUpdate);
-      socket.off('auction_joined', handleAuctionJoined);
+      (socket as any).off('auction_joined', handleAuctionJoined);
       socket.off('auction_ended', handleAuctionEnd);
       socket.off('bid_error', handleBidError);
     };

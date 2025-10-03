@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { Product as IProduct, ProductStatus, CertificateStatus } from '@/types';
+import { Product as IProduct, ProductStatus } from '@/types';
 
-export interface ProductDocument extends Omit<IProduct, '_id'>, Document {}
+export interface ProductDocument extends Omit<IProduct, '_id' | 'id'>, Document {}
 
 const ProductSchema = new Schema<ProductDocument>(
   {

@@ -326,7 +326,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
                     <div className="w-12 h-12 rounded-lg overflow-hidden bg-bg-menu-open border border-border flex-shrink-0">
                       {(fileData.url || fileData.preview) ? (
                         <Image 
-                          src={fileData.url || fileData.preview} 
+                          src={fileData.url || fileData.preview || ''} 
                           alt={fileData.file.name}
                           width={48}
                           height={48}

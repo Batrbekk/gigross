@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { User, UserRole, CreateUserInput } from '@/types';
+import { User, CreateUserInput } from '@/types';
 import { createCookieStorage } from '@/lib/storage';
 
 export interface AuthTokens {

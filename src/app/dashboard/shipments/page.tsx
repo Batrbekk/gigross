@@ -23,8 +23,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useApi } from '@/hooks/useApi';
-import { useAuthStore } from '@/stores/authStore';
-import { Shipment, ShipmentStatus, UserRole } from '@/types';
+import { Shipment, ShipmentStatus } from '@/types';
 import { 
   Search, 
   Filter, 
@@ -51,7 +50,6 @@ interface ShipmentsResponse {
 }
 
 export default function ShipmentsPage() {
-  const { user } = useAuthStore();
   const { execute, isLoading } = useApi();
   const [shipments, setShipments] = useState<Shipment[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -268,7 +266,7 @@ export default function ShipmentsPage() {
                   <TableShimmer rows={5} columns={7} />
                 ) : (
                   shipments.map((shipment, index) => (
-                  <TableRow key={shipment._id || shipment.id || `shipment-${index}`}>
+                  <TableRow key={shipment._id || `shipment-${index}`}>
                     <TableCell>
                       <div className="font-medium">
                         {shipment.trackingNumber}
@@ -315,7 +313,7 @@ export default function ShipmentsPage() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuItem asChild>
-                            <Link href={`/dashboard/shipments/${shipment._id || shipment.id}`}>
+                            <Link href={`/dashboard/shipments/${shipment._id}`}>
                               <Eye className="mr-2 h-4 w-4" />
                               Отследить
                             </Link>

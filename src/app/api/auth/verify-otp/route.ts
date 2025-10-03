@@ -67,16 +67,12 @@ export async function POST(request: NextRequest) {
 
       // Генерируем токены для автоматической авторизации
       const accessToken = generateAccessToken({
-        userId: user._id.toString(),
+        _id: user._id.toString(),
         email: user.email,
         role: user.role,
       });
 
-      const refreshToken = generateRefreshToken({
-        userId: user._id.toString(),
-        email: user.email,
-        role: user.role,
-      });
+      const refreshToken = generateRefreshToken(user._id.toString());
 
       // Устанавливаем refresh token в httpOnly cookie
       const response = NextResponse.json(
@@ -118,7 +114,7 @@ export async function POST(request: NextRequest) {
           message: 'OTP verified successfully',
           data: {
             email,
-            resetToken: otpRecord._id.toString(), // Используем ID OTP как токен сброса
+            resetToken: (otpRecord._id as string).toString(), // Используем ID OTP как токен сброса
           },
         },
         { status: 200 }

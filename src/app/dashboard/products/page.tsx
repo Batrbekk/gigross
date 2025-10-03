@@ -99,8 +99,8 @@ export default function ProductsPage() {
       console.log('Certificates response:', response);
       
       if (response && response.success) {
-        setCertificates(response.data.data || []);
-        console.log('Certificates loaded:', response.data.data);
+        setCertificates((response.data as any).data || []);
+        console.log('Certificates loaded:', (response.data as any).data);
       } else if (response === null) {
         console.warn('API request failed - user might not be authenticated');
         setCertificates([]);

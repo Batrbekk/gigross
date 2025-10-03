@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Wifi, WifiOff, Clock } from 'lucide-react';
+import { Wifi, WifiOff } from 'lucide-react';
 
 interface PollingStatusProps {
   isConnected: boolean;

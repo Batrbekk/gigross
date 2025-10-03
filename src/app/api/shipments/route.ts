@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
     const { searchParams } = new URL(request.url);
     const filters = Object.fromEntries(searchParams.entries());
 
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
     // Построение запроса - показываем отгрузки где пользователь продавец или покупатель
     const query = {
-      $or: [{ sellerId: user.userId }, { buyerId: user.userId }],
+      $or: [{ sellerId: userId }, { buyerId: userId }],
     };
 
     // Подсчет общего количества
@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
       return authResult.response;
     }
 
-    const { user } = authResult;
+    const userId = authResult.userId;
     const body = await request.json();
 
     // Простая валидация (можно расширить)
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
     // Создание отгрузки
     const shipment = new Shipment({
       lotId: body.lotId,
-      sellerId: user.userId,
+      sellerId: userId,
       buyerId: body.buyerId,
       trackingNumber,
       carrier: body.carrier,

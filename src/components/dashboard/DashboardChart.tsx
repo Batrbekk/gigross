@@ -1,6 +1,6 @@
 'use client';
 
-import { Area, AreaChart, Bar, BarChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { Area, AreaChart, Bar, BarChart, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { EmptyState } from '@/components/ui/empty-state';
 import { UserRole } from '@/types';
@@ -99,7 +99,7 @@ export function DashboardChart({ data, userRole }: DashboardChartProps) {
     }
   };
 
-  const chartConfig = getChartConfig();
+  const chartConfig = getChartConfig() as any;
 
   if (userRole === UserRole.PRODUCER) {
     return (

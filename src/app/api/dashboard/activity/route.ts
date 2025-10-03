@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
           .sort({ createdAt: -1 })
           .limit(3);
         
-        recentProducts.forEach((product, index) => {
+        recentProducts.forEach((product) => {
           activities.push({
             id: `product-${product._id}`,
             type: 'product',

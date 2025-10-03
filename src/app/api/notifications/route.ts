@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     // Построение запроса
     const query: any = { userId: authResult.userId };
-    if (status !== 'all') {
+    if (status && (status as string) !== 'all') {
       query.status = status;
     }
 
