@@ -1,0 +1,33 @@
+/* Fallback для браузеров без поддержки backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  }
+  
+  .glass-overlay {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  }
+}
+
+/* Дополнительные стили для улучшения производительности */
+.glass-panel,
+.glass-overlay {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Анимация для каретки в OTP полях */
+@keyframes caret-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.animate-caret-blink {
+  animation: caret-blink 1s infinite;
+}

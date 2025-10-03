@@ -1,0 +1,14 @@
+node_modules
+.next
+.vercel
+.env*
+*.log
+yarn.lock
+package-lock.json
+public
+.git
+.vscode
+.idea
+dist
+build
+coverage

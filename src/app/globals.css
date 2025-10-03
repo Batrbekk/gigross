@@ -1,26 +1,189 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Основные цвета */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  
+  /* Акцентные цвета */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  
+  /* Цвета текста */
+  --color-text-heading: var(--text-heading);
+  --color-text-body: var(--text-body);
+  
+  /* Фоновые цвета */
+  --color-bg-sidebar-header: var(--bg-sidebar-header);
+  --color-bg-menu-open: var(--bg-menu-open);
+  
+  /* Эффектные цвета */
+  --color-effect-purple: var(--effect-purple);
+  --color-effect-yellow: var(--effect-yellow);
+  --color-effect-green: var(--effect-green);
+  
+  /* Цвета skeleton */
+  --color-skeleton-bg: var(--skeleton-bg);
+  --color-skeleton-shimmer: var(--skeleton-shimmer);
+  
+  /* Стандартные цвета компонентов */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  /* Sidebar цвета */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Chart цвета */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  
+  /* Шрифты */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Радиусы */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.625rem;
+  
+  /* Основные цвета */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  
+  /* Цвета skeleton */
+  --skeleton-bg: oklch(0.95 0 0);
+  --skeleton-shimmer: oklch(0.98 0 0);
+  
+  /* Акцентные цвета */
+  --accent-primary: #573CFF;
+  --accent-secondary: #0000FE;
+  
+  /* Цвета текста */
+  --text-heading: #02015A;
+  --text-body: #4E5774;
+  
+  /* Фоновые цвета */
+  --bg-sidebar-header: #F3F7FB;
+  --bg-menu-open: #ECF1F7;
+  
+  /* Эффектные цвета */
+  --effect-purple: #ECE5FF;
+  --effect-yellow: #FBF7B8;
+  --effect-green: #D9FFD8;
+  
+  /* Цвета для badge с белым текстом */
+  --color-badge-purple: var(--badge-purple);
+  --color-badge-yellow: var(--badge-yellow);
+  --color-badge-green: var(--badge-green);
+  
+  /* Стандартные цвета компонентов */
+  --card: oklch(1 0 0);
+  --card-foreground: var(--text-body);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--text-body);
+  --primary: var(--accent-primary);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--bg-menu-open);
+  --secondary-foreground: var(--text-heading);
+  --muted: var(--bg-sidebar-header);
+  --muted-foreground: var(--text-body);
+  --accent: var(--accent-secondary);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: var(--accent-primary);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  
+  /* Sidebar цвета */
+  --sidebar: var(--bg-sidebar-header);
+  --sidebar-foreground: var(--text-heading);
+  --sidebar-primary: var(--accent-primary);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--bg-menu-open);
+  --sidebar-accent-foreground: var(--text-heading);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: var(--accent-primary);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.dark {
+  /* Основные цвета для темной темы */
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  
+  /* Акцентные цвета остаются теми же */
+  --accent-primary: #573CFF;
+  --accent-secondary: #0000FE;
+  
+  /* Цвета текста для темной темы */
+  --text-heading: oklch(0.985 0 0);
+  --text-body: oklch(0.8 0 0);
+  
+  /* Фоновые цвета для темной темы */
+  --bg-sidebar-header: oklch(0.15 0 0);
+  --bg-menu-open: oklch(0.2 0 0);
+  
+  /* Эффектные цвета для темной темы */
+  --effect-purple: oklch(0.2 0.05 270);
+  --effect-yellow: oklch(0.3 0.05 60);
+  --effect-green: oklch(0.2 0.05 120);
+  
+  /* Цвета skeleton для темной темы */
+  --skeleton-bg: oklch(0.25 0 0);
+  --skeleton-shimmer: oklch(0.3 0 0);
+  
+  /* Sidebar цвета для темной темы */
+  --sidebar: var(--bg-sidebar-header);
+  --sidebar-foreground: var(--text-heading);
+  --sidebar-primary: var(--accent-primary);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: var(--bg-menu-open);
+  --sidebar-accent-foreground: var(--text-heading);
+  --sidebar-border: oklch(0.3 0 0);
+  --sidebar-ring: var(--accent-primary);
 }
